@@ -25,6 +25,9 @@ class DBStorage:
     __engine = None
     __session = None
 
+    # +++++
+    classes = classes
+
     def __init__(self):
         """Instantiate a DBStorage object"""
         HBNB_MYSQL_USER = getenv('HBNB_MYSQL_USER')
