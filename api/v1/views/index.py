@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""5yy
+"""
 empty doc
 """
 from api.v1.views import app_views
