@@ -4,25 +4,17 @@ empty doc
 """
 from api.v1.views import app_views
 from models import storage
-from flask import request, abort, make_response, jsonify
-from flasgger import Swagger, swag_from
+from flask import request, abort, make_response
 
 State = storage.classes["State"]
 
 
-@app_views.route("/states", methods=["GET", "POST"],
-                 endpoint="states_no_id", strict_slashes=False)
+@app_views.route("/states", methods=["GET", "POST"], strict_slashes=False)
 @app_views.route("/states/<state_id>", methods=["GET", "DELETE", "PUT"],
-                 endpoint="states_id", strict_slashes=False)
-@swag_from('swag_files/states_no_id.yml', endpoint="states_no_id",
-           methods=["GET", "POST"])
-@swag_from('swag_files/states_id.yml', endpoint="states_id",
-           methods=["GET", "PUT", "DELETE"])
+                 strict_slashes=False)
 def B_states(state_id=None):
     """
     the B stands for blue print
-    ----
-    def
     """
     container = ''
     if state_id:
@@ -33,8 +25,8 @@ def B_states(state_id=None):
     if request.method == "GET":
         if not state_id:
             obj = storage.all(State).values()
-            return jsonify([o.to_dict() for o in obj])
-        return jsonify(obj.to_dict())
+            return [o.to_dict() for o in obj]
+        return obj.to_dict()
 
     elif request.method == "POST":
         if not request.is_json:
@@ -49,7 +41,7 @@ def B_states(state_id=None):
         res.status_code = 201
         # or
         # return (obj.to_dict(), 201)
-        return jsonify(res)
+        return res
 
     elif request.method == "PUT":
         not_allowed = ["id", "create_at", "updated_at"]
@@ -60,11 +52,11 @@ def B_states(state_id=None):
             if i not in not_allowed:
                 setattr(obj, i, j)
         obj.save()
-        return jsonify(obj.to_dict())
+        return obj.to_dict()
 
     elif request.method == "DELETE":
         storage.delete(obj)
         storage.save()
-        return jsonify({})
+        return {}
     else:
-        abort(404, "Not found")
+        pass
