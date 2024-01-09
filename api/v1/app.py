@@ -32,11 +32,11 @@ def teardown(exception):
 
 
 @app.errorhandler(404)
-def teardown(err_msg):
+def my_404(err_msg):
     """
     not found
     """
-    return {"error": "Not found"}
+    return {"error": "Not found"}, 404
 
 
 if __name__ == "__main__":
