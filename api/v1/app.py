@@ -32,7 +32,7 @@ def teardown(exception):
 
 
 @app.errorhandler(404)
-def my_404(err_msg):
+def teardown(err_msg):
     """
     not found
     """
