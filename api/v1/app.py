@@ -36,7 +36,7 @@ def my_404(err_msg):
     """
     not found
     """
-    return {"error": "Not found"}, 404
+    return {"error": "Not found"}
 
 
 if __name__ == "__main__":
