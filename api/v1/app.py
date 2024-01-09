@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
 main routh engine
+doc
 """
 
 from flask import Flask
@@ -15,7 +16,7 @@ app = Flask(__name__)
 host = getenv("HBNB_API_HOST", "0.0.0.0")
 port = getenv("HBNB_API_PORT", "5000")
 
-swagger = Swagger(app)
+"swagger = Swagger(app)"
 cors = CORS(app, resources={r'/*': {'origins': host}})
 
 app.register_blueprint(app_views)
